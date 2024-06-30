@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->fullText(['slug']);
-            $table->index(['title']);
+            $table->fullText(['title']);
         });
     }
 
@@ -33,6 +33,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropFullText(['slug']);
+            $table->dropFullText(['title']);
+        });
         Schema::dropIfExists('products');
     }
 };
