@@ -17,7 +17,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                           value="{{ old('name') }}" required autocomplete="given-name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <input id="lastname" type="text"
                                            class="form-control @error('lastname') is-invalid @enderror" name="lastname"
-                                           value="{{ old('lastname') }}" required autocomplete="name" autofocus>
+                                           value="{{ old('lastname') }}" required autocomplete="family-name">
 
                                     @error('lastname')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                                 <div class="col-md-6">
                                     <input id="phone" type="tel"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                           value="{{ old('phone') }}" required autocomplete="email">
+                                           value="{{ old('phone') }}" required autocomplete="tel">
 
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -78,14 +78,13 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="email"
+                                <label for="birthdate"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Birthdate') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="birthdate" type="tel"
+                                    <input id="birthdate" type="date"
                                            class="form-control @error('birthdate') is-invalid @enderror"
-                                           name="birthdate" value="{{ old('birthdate') }}" required
-                                           autocomplete="email">
+                                           name="birthdate" value="{{ old('birthdate') }}" required autocomplete="bday">
 
                                     @error('birthdate')
                                     <span class="invalid-feedback" role="alert">

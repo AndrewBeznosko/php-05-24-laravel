@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Category name"
                                    value="{{ old('name') }}">
                         </div>
 
@@ -21,7 +21,7 @@
                                 @foreach($categories as $category)
                                     <option
                                         value="{{ $category->id }}"
-                                        @if(old('parent_id') == $category->id) selected @endif
+                                        @if(old('parent_id') && old('parent_id') == $category->id) selected @endif
                                     >
                                         {{ $category->name }}
                                     </option>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-end">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-outline-success">Create</button>
                     </div>
                 </form>
             </div>
