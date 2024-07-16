@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Http\Requests\Admin\Products\CreateRequest;
 use App\Models\Product;
 use App\Repositories\Contract\ProductsRepositoryContract;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
@@ -18,6 +19,11 @@ class ProductsRepository implements ProductsRepositoryContract
             DB::beginTransaction();
 
             $data = $this->formRequestData($request);
+
+            /** @var UploadedFile $file */
+            $file = $data['attributes']['thumbnail'];
+            $data['attributes']['thumbnail'] = $file->getClientOriginalName();
+
             $product = Product::create($data['attributes']);
             $this->setProductRelationData($product, $data);
 

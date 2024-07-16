@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\Permissions\Category as Permission;
+use App\Enums\Permissions\Product as Permission;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Categories\EditRequest;
 use App\Http\Requests\Admin\Products\CreateRequest;
@@ -81,8 +81,11 @@ class ProductsController extends Controller
     {
         $this->middleware('permission:' . Permission::DELETE->value);
 
+        $product->categories()->detach();
         $product->deleteOrFail();
 
-        return redirect()->route('admin.categories.index');
+        notify()->success('Product deleted successfully');
+
+        return redirect()->route('admin.products.index');
     }
 }
