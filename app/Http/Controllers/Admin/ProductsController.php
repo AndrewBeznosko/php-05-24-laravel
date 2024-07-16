@@ -39,9 +39,12 @@ class ProductsController extends Controller
     public function store(CreateRequest $request, ProductsRepositoryContract $repository)
     {
         if ($product = $repository->create($request)) {
+            notify()->success('Product created successfully');
+
             return redirect()->route('admin.products.index');
         }
 
+        notify()->error('Product creation failed');
         return redirect()->back()->withInput();
     }
 
