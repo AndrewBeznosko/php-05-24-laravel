@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\Contracts\FileServiceContract;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FileService implements FileServiceContract
 {
@@ -16,7 +17,7 @@ class FileService implements FileServiceContract
 
         $additionalPath = !empty($additionalPath) ? $additionalPath . '/' : '';
 
-        $filePath = $additionalPath . time() . '_' . $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+        $filePath = $additionalPath . time() . '_' . Str::random(10) . '.' . $file->getClientOriginalName();
 
         Storage::put($filePath, file_get_contents($file));
         Storage::setVisibility($filePath, 'public');

@@ -27,8 +27,8 @@ class EditRequest extends FormRequest
         $id = $this->route('category')->id;
 
         return [
-            'name' => ['required', 'string', 'min:2', 'max:50', Rule::unique(Category::class)->ignore($id)],
-            'parent_id' => ['nullable', 'integer', 'exists:' . Category::class . ',id'],
+            'name' => ['required', 'string', 'min:2', 'max:50', Rule::unique(Category::class, 'name')->ignore($id)],
+            'parent_id' => ['nullable', 'numeric', 'exists:' . Category::class . ',id']
         ];
     }
 }

@@ -16,8 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public array $bindings = [
         ProductsRepositoryContract::class => ProductsRepository::class,
         ImagesRepositoryContract::class => ImagesRepository::class,
-        FileServiceContract::class => FileService::class,
-//        \App\Repositories\Contracts\CategoryRepository::class => \App\Repositories\CategoryRepository::class,
+        FileServiceContract::class => FileService::class
     ];
 
     /**

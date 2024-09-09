@@ -3,14 +3,14 @@
 namespace App\Repositories;
 
 use App\Repositories\Contract\ImagesRepositoryContract;
-use Exception;
+use Illuminate\Database\Eloquent\Model;
 
 class ImagesRepository implements ImagesRepositoryContract
 {
-    public function attach(\Illuminate\Database\Eloquent\Model $model, string $relation, array $images = [], ?string $directory = null): void
+    public function attach(Model $model, string $relation, array $images = [], ?string $directory = null): void
     {
         if (!method_exists($model, $relation)) {
-            throw new Exception('Invalid relation');
+            throw new \Exception('Invalid relation');
         }
 
         if (!empty($images)) {
