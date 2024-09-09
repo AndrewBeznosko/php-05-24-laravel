@@ -23,11 +23,19 @@
                             <td>{{ $category->parent ? $category->parent->name : '-' }}</td>
                             <td>{{ $category->created_at }}</td>
                             <td>{{ $category->updated_at }}</td>
-                            <td></td>
+                            <td>
+                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-primary">Edit</a>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                {{ $categories->links() }}
             </div>
         </div>
     </div>
