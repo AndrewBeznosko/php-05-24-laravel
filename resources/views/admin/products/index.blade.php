@@ -8,6 +8,7 @@
                     <thead>
                     <tr>
                         <th>@sortablelink('id', 'ID')</th>
+                        <th></th>
                         <th>@sortablelink('title', 'Title')</th>
                         <th>@sortablelink('SKU', 'SKU')</th>
                         <th>@sortablelink('price', 'Price')</th>
@@ -23,6 +24,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>{{$product->id}}</td>
+                            <td><img src="{{$product->thumbnailUrl}}" alt="{{$product->title}}" width="100px"></td>
                             <td>{{$product->title}}</td>
                             <td>{{$product->SKU}}</td>
                             <td>{{$product->price}}</td>
@@ -34,11 +36,14 @@
                             <td>{{$product->created_at}}</td>
                             <td>{{$product->updated_at}}</td>
                             <td>
-                                <form action="{{route('admin.products.destroy', $product)}}" method="POST" class="btn-group" role="group" aria-label="Basic example">
+                                <form action="{{route('admin.products.destroy', $product)}}" method="POST"
+                                      class="btn-group" role="group" aria-label="Basic example">
                                     @csrf
                                     @method('DELETE')
-                                    <a type="button" href="{{route('admin.products.edit', $product)}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <a type="button" href="{{route('admin.products.edit', $product)}}"
+                                       class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

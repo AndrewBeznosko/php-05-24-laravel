@@ -4,7 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex align-items-center justify-content-center pt-5">
-                <form class="card w-50" method="POST" enctype="multipart/form-data" action="{{route('admin.products.store')}}">
+                <form class="card w-50" method="POST" enctype="multipart/form-data"
+                      action="{{route('admin.products.store')}}">
                     @csrf
 
                     <h5 class="card-header">Create product</h5>
@@ -137,6 +138,23 @@
                                        class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail">
 
                                 @error('thumbnail')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="images"
+                                   class="col-md-4 col-form-label text-md-end">{{ __('Additional Images') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="images" type="file"
+                                       class="form-control @error('images') is-invalid @enderror" name="images[]"
+                                       multiple>
+
+                                @error('images')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
