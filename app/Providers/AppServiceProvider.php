@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
+use App\Policies\Api\ProductPolicy;
 use App\Repositories\Contract\ImagesRepositoryContract;
 use App\Repositories\Contract\ProductsRepositoryContract;
 use App\Repositories\ImagesRepository;
@@ -9,6 +11,7 @@ use App\Repositories\ProductsRepository;
 use App\Services\Contracts\FileServiceContract;
 use App\Services\FileService;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+        Gate::policy(Product::class, ProductPolicy::class);
     }
 }
