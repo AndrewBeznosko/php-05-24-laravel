@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\Contracts\FileServiceContract;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,8 +30,7 @@ class Product extends Model
         'quantity',
         'thumbnail',
         'created_at',
-        'updated_at',
-
+        'updated_at'
     ];
 
     public $sortable = [
@@ -44,6 +44,10 @@ class Product extends Model
         'updated_at'
     ];
 
+    protected $casts = [
+        'price' => 'float',
+    ];
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
@@ -52,6 +56,11 @@ class Product extends Model
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function scopeExists(Builder $query): Builder
+    {
+        return $query->where('quantity', '>', 0);
     }
 
     public function setThumbnailAttribute($image)
@@ -76,5 +85,19 @@ class Product extends Model
     public function thumbnailUrl(): Attribute
     {
         return Attribute::get(fn() => Storage::url($this->attributes['thumbnail']));
+    }
+
+    public function finalPrice(): Attribute
+    {
+        return Attribute::get(
+            fn() => round($this->attributes['price'] - ($this->attributes['price'] * ($this->attributes['discount'] / 100)), 2)
+        );
+    }
+
+    public function exist(): Attribute
+    {
+        return Attribute::get(
+            fn() => $this->quantity > 0
+        );
     }
 }
